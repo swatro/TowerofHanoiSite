@@ -87,7 +87,7 @@ var changeDisks = function(options){
   towerLocations["tower1"] = 50;
   towerLocations["tower2"] = towerLocations["tower1"] + (towerWidth +distanceBetweenTowers) ; 
   towerLocations["tower3"] = towerLocations["tower2"] + (towerWidth +distanceBetweenTowers);
-  $("body").append('<svg width="10000" height="10000">' 
+  $(".game").append('<svg width="1000" height="' + towerHeight + ' ">' 
     + '<rect x='+ towerxLocations[0] + '  y=10 width="' + towerWidth + '" height="' + towerHeight + '"/>'
     + '<rect x='+ towerxLocations[1] + ' y=10 width="' + towerWidth + '" height="' + towerHeight + '"/>'
     + '<rect x='+ towerxLocations[2] + ' y=10 width="' + towerWidth + '" height="' + towerHeight + '"/>'

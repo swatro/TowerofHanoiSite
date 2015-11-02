@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -7,22 +6,33 @@
     <script type = "text/javascript"  src = "https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src ="runner.js" ></script>
     <link rel="stylesheet" type="text/css" href="hanoi.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   </head>
   
   <body>
-    <h1>Tower of Hanoi </h1>
-    <div>
-      <span> Select number of disks: </span>
-      <select name="selectDisks" onchange="changeDisks(this)">
-        <option value="0"></option> 
-        <option value="2">2</option> 
-        <option value="3">3</option>
-        <option value="4">4</option>
-      </select>
-      
-      <button id="forwardButton"> Move Fowards</button>
+    <div class="jumbotron">
+      <h1>Tower of Hanoi </h1>
     </div>
-
+    <div class="panel panel-default">
+      <div class="panel-heading"> Create the game </div>
+      <div class="panel-body"> Select the number of disks to play with: 
+        <select name="selectDisks" onchange="changeDisks(this)">
+          <option value="0"></option> 
+          <option value="2">2</option> 
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="panel panel-default">
+      <div class="panel-heading"> Play </div>
+      <div class="panel-body"> 
+        <button id="forwardButton"> Move Fowards</button>
+        <div class="game"> </div>
+      </div>
+    </div>
     <script>
       runCode();
     </script>

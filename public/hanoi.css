@@ -1,3 +1,7 @@
 rect {
 	fill : pink;
 }
+
+body {
+	padding: 10px;
+}
