@@ -1,5 +1,5 @@
-towerLocations = {"tower1" : 50, "tower2" : 100, "tower3" : 150};
-heightLocations = {1 : 90, 2 : 50, 3 : 20};
+towerLocations = {};
+heightLocations = {};
 moves = [];
 
 runCode = function() {
@@ -68,12 +68,31 @@ var changeDisks = function(options){
   var yStart  = 0;
   for (var i=0; i<numberOfDisks; i++){
     yStart += 2* radius + 5; 
-    heightLocations[numberOfDisks-i]=yStart;
+    heightLocations[numberOfDisks-i]= yStart;
     var circleId = "circle_" + String.fromCharCode('A'.charCodeAt() + i);
     diskHtml += '<circle id = "' + circleId + '" cx="50" cy="' + yStart + '" r="' + radius + '"></circle>';
     radius += 5;
   }
-  $("body").append('<svg width="10000" height="10000">' +  diskHtml + '</svg>');
+  var towerHeight = yStart + radius-5;
+  var towerx = 50 - radius
+  var towerWidth = 2* radius
+  var distanceBetweenTowers = 10;
+
+  var towerxLocations = []
+  towerxLocations[0] = towerx;
+  towerxLocations[1] = towerxLocations[0] + towerWidth + distanceBetweenTowers;
+  towerxLocations[2] = towerxLocations[1] + towerWidth + distanceBetweenTowers;
+
+
+  towerLocations["tower1"] = 50;
+  towerLocations["tower2"] = towerLocations["tower1"] + (towerWidth +distanceBetweenTowers) ; 
+  towerLocations["tower3"] = towerLocations["tower2"] + (towerWidth +distanceBetweenTowers);
+  $("body").append('<svg width="10000" height="10000">' 
+    + '<rect x='+ towerxLocations[0] + '  y=10 width="' + towerWidth + '" height="' + towerHeight + '"/>'
+    + '<rect x='+ towerxLocations[1] + ' y=10 width="' + towerWidth + '" height="' + towerHeight + '"/>'
+    + '<rect x='+ towerxLocations[2] + ' y=10 width="' + towerWidth + '" height="' + towerHeight + '"/>'
+    +  diskHtml 
+    + '</svg>');
   
   $.ajax(
     {
