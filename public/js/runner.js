@@ -2,8 +2,12 @@ var towerLocations = {};
 var heightLocations = {};
 var moves = [];
 var index = 0;
+var startRadius = 10; 
+var distanceBetweenTowers = 10;
 
 var move = function(index){
+  updateMoveButton(Game.isGameOver(index, moves.length)); 
+
   var circleName = "#circle_" + moves[index].circle;
   var xLocation = towerLocations[moves[index].tower];
   var yLocation = heightLocations[moves[index].level]
@@ -69,9 +73,7 @@ var setGame = function(options){
 
   $('svg').remove();
   index = 0; 
-
-  var startRadius = 10; 
-  var distanceBetweenTowers = 10;
+  updateMoveButton(false)
 
   var disks = Game.createDisks(numberOfDisks, startRadius); 
   var towers = Game.createTowers(numberOfDisks, startRadius);
@@ -84,4 +86,8 @@ var setGame = function(options){
     + setDisks(numberOfDisks, startRadius, disks) 
     + '</svg>');
 
+}
+
+var updateMoveButton = function(status){
+  $('#forwardButton').attr('disabled', status); 
 }

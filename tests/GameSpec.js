@@ -71,4 +71,12 @@ describe("The game", function() {
   	expect(diskXLocations["tower3"]).toBe(170)
   })
 
+  it("should indicate when the game is over", function(){
+  	var indexThatGameIsOn = 9;
+  	var totalMoves = 10;
+  	var isGameOver = Game.isGameOver(indexThatGameIsOn, totalMoves);
+
+  	expect(isGameOver).toBe(true);
+  })
+
 });

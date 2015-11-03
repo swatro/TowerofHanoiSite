@@ -55,6 +55,10 @@ Game = {
 			diskYlocationsPerDisk[diskIndex] = disks[diskIndex].getYLocation();
 		}
 		return diskYlocationsPerDisk;
+	},
+
+	isGameOver : function(index, totalNumberOfMoves){
+		return index+1 == totalNumberOfMoves;
 	}
 
 }
