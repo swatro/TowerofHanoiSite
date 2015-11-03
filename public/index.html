@@ -25,6 +25,9 @@
           <option value="4">4</option>
           <option value="5">5</option>
           <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
         </select>
       </div>
     </div>
@@ -33,8 +36,12 @@
       <h3 class="panel-heading"> Play </h3>
       <div class="panel-body"> 
 
-        <div>
+        <div class="text-left">
           <button id="forwardButton" onclick="playGame()" disabled="true"> Move </button>
+        </div>
+        <div class="text-left">
+          <span> Remaining Moves: </span>
+          <span id="remainingMoves"> 0 </span>
         </div>
 
         <div class="game"> </div>

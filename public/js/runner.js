@@ -6,7 +6,7 @@ var startRadius = 10;
 var distanceBetweenTowers = 10;
 
 var move = function(index){
-  updateMoveButton(Game.isGameOver(index, moves.length)); 
+  updateMoveButton(Game.isGameOver(index, moves.length), Game.calculateRemainingMoves(index, moves.length)); 
 
   var circleName = "#circle_" + moves[index].circle;
   var xLocation = towerLocations[moves[index].tower];
@@ -63,6 +63,10 @@ var setMoveData = function(numberOfDisks){
       url : "/data/" + numberOfDisks, 
       success: function(result) {
         moves = DataParser.getMoves(result);
+        updateMoveButton(false, moves.length)
+      },
+      error: function(result){
+        updateMoveButton(true, 0)
       }
     })
 }
@@ -73,7 +77,6 @@ var setGame = function(options){
 
   $('svg').remove();
   index = 0; 
-  updateMoveButton(false)
 
   var disks = Game.createDisks(numberOfDisks, startRadius); 
   var towers = Game.createTowers(numberOfDisks, startRadius);
@@ -85,9 +88,9 @@ var setGame = function(options){
     + setTowers(towers)
     + setDisks(numberOfDisks, startRadius, disks) 
     + '</svg>');
-
 }
 
-var updateMoveButton = function(status){
+var updateMoveButton = function(status, remainingMoves){
   $('#forwardButton').attr('disabled', status); 
+  $('#remainingMoves').text(remainingMoves);
 }

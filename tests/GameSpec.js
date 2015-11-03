@@ -1,9 +1,5 @@
 
 describe("The game", function() {
-  it("should calculate remaining moves", function() {
-  	var remainingMoves = Game.getRemainingMoves(3, 1)
-    expect(remainingMoves).toBe(6);
-  });
 
   it("should initialize generate Disks with incrementing radii", function(){
   	var numberOfDisk = 3;
@@ -73,10 +69,18 @@ describe("The game", function() {
 
   it("should indicate when the game is over", function(){
   	var indexThatGameIsOn = 9;
-  	var totalMoves = 10;
-  	var isGameOver = Game.isGameOver(indexThatGameIsOn, totalMoves);
+  	var totalStates = 10;
+  	var isGameOver = Game.isGameOver(indexThatGameIsOn, totalStates);
 
   	expect(isGameOver).toBe(true);
+  })
+
+  it("should get the number Of remaining moves", function(){
+    var indexThatGameIsOn = 2;
+    var totalStates = 10;
+    var remainingMoves = Game.calculateRemainingMoves(indexThatGameIsOn, totalStates);
+
+    expect(remainingMoves).toBe(7)
   })
 
 });

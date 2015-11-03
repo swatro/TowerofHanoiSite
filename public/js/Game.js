@@ -5,11 +5,6 @@ Game = {
 	diskStartingXLocation: 50,
 	distanceBetweenTowers: 10,
 
-	getRemainingMoves : function(numberOfDisks, moveIndex){
-  		var totalMoves = Math.pow(2, numberOfDisks) -1;
-  		return totalMoves - moveIndex;
-	}, 
-
 	createDisks : function(numberOfDisks, startRadius){
 		var disks = [];
 		var yStart = 0; 
@@ -59,6 +54,10 @@ Game = {
 
 	isGameOver : function(index, totalNumberOfMoves){
 		return index+1 == totalNumberOfMoves;
+	},
+
+	calculateRemainingMoves : function(index, totalStates){
+		return totalStates - index - 1; 
 	}
 
 }
