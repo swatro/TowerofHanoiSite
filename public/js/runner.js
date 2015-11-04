@@ -64,10 +64,12 @@ var setMoveData = function(numberOfDisks){
       url : "/data/" + numberOfDisks, 
       success: function(result) {
         moves = DataParser.getMoves(result);
-        updateMoveButton(false, moves.length)
+        updateMoveButton(false, moves.length);
+        updateResetButton(numberOfDisks);
       },
       error: function(result){
         updateMoveButton(true, 0)
+        updateResetButton(numberOfDisks);
       }
     })
 }
@@ -92,7 +94,6 @@ var setGame = function(options){
 
 var resetGame = function(){
   index = 0;
-  console.log(index)
   var disks = Game.createDisks(numberOfDisks, startRadius); 
 
   for (var i in disks){
@@ -115,4 +116,10 @@ var resetGame = function(){
 var updateMoveButton = function(status, remainingMoves){
   $('#forwardButton').attr('disabled', status); 
   $('#remainingMoves').text(remainingMoves);
+}
+
+var updateResetButton = function(numberOfDisk){
+  var status = numberOfDisk == 0;
+  $('#resetButton').attr('disabled', status); 
+
 }
