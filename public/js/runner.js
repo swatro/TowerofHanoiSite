@@ -6,7 +6,7 @@ var startRadius = 10;
 var distanceBetweenTowers = 10;
 var numberOfDisks = 0;
 
-var move = function(index){
+var move = function(){
   updateMoveButton(Game.isGameOver(index, moves.length), Game.calculateRemainingMoves(index, moves.length)); 
 
   var circleName = "#circle_" + moves[index].circle;
@@ -91,12 +91,14 @@ var setGame = function(options){
 }
 
 var resetGame = function(){
+  index = 0;
+  console.log(index)
   var disks = Game.createDisks(numberOfDisks, startRadius); 
 
-  for (var index in disks){
-    var circleName = "#" + disks[index].getDiskId();
+  for (var i in disks){
+    var circleName = "#" + disks[i].getDiskId();
     var xLocation = towerLocations["tower1"];
-    var yLocation = disks[index].getYLocation()
+    var yLocation = disks[i].getYLocation()
 
     var circle = d3.selectAll(circleName)
     .transition()
