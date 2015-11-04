@@ -17,7 +17,8 @@ module.exports = function(config) {
     files: [
       'js/*.js',
       'public/js/*.js',
-      'tests/*Spec.js'
+      'tests/*Spec.js',
+      'node_modules/underscore/*.js'
     ],
 
 

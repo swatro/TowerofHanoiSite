@@ -6,39 +6,33 @@ Game = {
 	distanceBetweenTowers: 10,
 
 	createDisks : function(numberOfDisks, startRadius){
-		var disks = [];
 		var yStart = 0; 
 
-		for (var i = 0; i < numberOfDisks; i++){
+		return _.map(_.range(numberOfDisks), function(i){
 			var diskRadius = startRadius + i*Game.radiusIncrement;
 			yStart += 2*diskRadius + Game.distanceBetweenDisks 
 			var diskId = "circle_" + String.fromCharCode('A'.charCodeAt() + i);
-			disks[i] = Disk(diskRadius, yStart, diskId);
-		}
-		return disks;
+			return Disk(diskRadius, yStart, diskId);
+		})
 	},
 
 	createTowers : function(numberOfDisks, startRadius){
-		var towers = [];
-
 		var maxRadius = startRadius + Game.radiusIncrement*numberOfDisks;
 		var width = 2*maxRadius;  
 		var height = 2*numberOfDisks*startRadius + numberOfDisks*Game.distanceBetweenDisks + Game.radiusIncrement*(numberOfDisks-1)*numberOfDisks;
 		height += maxRadius; 
 
-		for (var i =0; i<3; i++){
+		return _.map(_.range(3), function(i){
 			var xLocation = Game.diskStartingXLocation - maxRadius + i*(width+ Game.distanceBetweenTowers);
-			towers[i] = Tower(width, height, xLocation)
-		}
-
-		return towers;
+			return Tower(width, height, xLocation)
+		})
 	},
 
 	createDiskXLocationsPerTower : function(towerWidth){
 		var diskXLocationsPerTower = [];
 
 		diskXLocationsPerTower["tower1"] = Game.startingXLocationForDisks;
-  		diskXLocationsPerTower["tower2"] = diskXLocationsPerTower["tower1"] + (towerWidth +Game.distanceBetweenTowers) ; 
+  		diskXLocationsPerTower["tower2"] = diskXLocationsPerTower["tower1"] + (towerWidth +Game.distanceBetweenTowers); 
   		diskXLocationsPerTower["tower3"] = diskXLocationsPerTower["tower2"] + (towerWidth +Game.distanceBetweenTowers);
 
 		return diskXLocationsPerTower;
@@ -46,9 +40,9 @@ Game = {
 
 	createDiskYLocationsForTowerLevel : function(disks){
 		var ylocations = {};
-		for (var i=0; i<disks.length; i++){
-      		ylocations[disks.length-i] = disks[i].getYLocation();
-      	}
+		_.each(disks, function(num, key){
+			ylocations[disks.length - key] = num.getYLocation();
+		})
       	return ylocations;
 	},
 
@@ -61,20 +55,12 @@ Game = {
 	},
 
 	createDiskHtml : function(numberOfDisks, startRadius, disks){
-	    var diskHtml = '';
-	    for (var i=0; i<numberOfDisks; i++){
-	      diskHtml += disks[i].getHtml();
-	    }
-	    return diskHtml
+		return _.reduce(disks, function(output, disk){ return output + disk.getHtml();}, "");
 	},
 
 	createTowerHtml : function(towers){
-	    var towerHtml = ""
-	    for (var i=0; i<towers.length; i++){
-	      towerHtml += towers[i].getHtml();
-	    }
-		return towerHtml; 
-  }
+		return _.reduce(towers, function(output, tower){ return output + tower.getHtml();}, "");
+  	}
 
 }
 

@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "express": "*"
+    "express": "*",
+    "underscore" : "*"
   },
   "engines": {
     "node": "0.12.7"

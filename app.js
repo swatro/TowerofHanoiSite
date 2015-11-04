@@ -4,6 +4,7 @@ var baseUrl = "http://murmuring-stream-5595.herokuapp.com/towerOfHanoi/";
 
 var app = express();
 app.use(express.static('public'));
+app.use('/scripts', express.static(__dirname + '/node_modules/underscore/'));
 
 app.param(function(param, option) {
   return function (req, res, next, val) {
