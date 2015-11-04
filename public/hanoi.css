@@ -1,5 +1,9 @@
 rect {
-	fill : pink;
+	fill : #e2f0f9;	
+}
+
+circle {
+	fill: #333;
 }
 
 body {
