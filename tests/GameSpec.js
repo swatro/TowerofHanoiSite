@@ -83,4 +83,35 @@ describe("The game", function() {
     expect(remainingMoves).toBe(7)
   })
 
+  it("should get the y locations for the disks given the level in the tower", function(){
+    var numberOfDisk = 4;
+    var startRadius = 10;
+    var disks = Game.createDisks(numberOfDisk, startRadius);
+    var heightLocations = Game.createDiskYLocationsForTowerLevel(disks);
+
+    expect(heightLocations[1]).toBe(160)
+    expect(heightLocations[2]).toBe(105)
+    expect(heightLocations[3]).toBe(60)
+    expect(heightLocations[4]).toBe(25)
+  })
+
+  it("should create the html for all disks", function(){
+    var numberOfDisks = 2;
+    var startRadius = 10;
+    var disks = Game.createDisks(numberOfDisks, startRadius);
+    var diskHtml = Game.createDiskHtml(numberOfDisks, startRadius, disks);
+
+    var expectedOutput = '<circle id = "circle_A" cx="50" cy="25" r="10"></circle><circle id = "circle_B" cx="50" cy="60" r="15"></circle>';
+    expect(diskHtml).toBe(expectedOutput);
+  })
+
+  it("should create the html for all towers", function(){
+    var numberOfDisks = 3;
+    var startRadius = 10;
+    var towers = Game.createTowers(numberOfDisks, startRadius);  
+    var towerHtml = Game.createTowerHtml(towers);
+
+    var expectedOutput = '<rect x=25 y=10 width="50" height="130"/><rect x=85 y=10 width="50" height="130"/><rect x=145 y=10 width="50" height="130"/>'
+    expect(towerHtml).toBe(expectedOutput);
+  })
 });

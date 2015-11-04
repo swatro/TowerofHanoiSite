@@ -43,14 +43,38 @@ Game = {
 
 		return diskXLocationsPerTower;
 	},
-	
+
+	createDiskYLocationsForTowerLevel : function(disks){
+		var ylocations = {};
+		for (var i=0; i<disks.length; i++){
+      		ylocations[disks.length-i] = disks[i].getYLocation();
+      	}
+      	return ylocations;
+	},
+
 	isGameOver : function(index, totalNumberOfMoves){
 		return index+1 == totalNumberOfMoves;
 	},
 
 	calculateRemainingMoves : function(index, totalStates){
 		return totalStates - index - 1; 
-	}
+	},
+
+	createDiskHtml : function(numberOfDisks, startRadius, disks){
+	    var diskHtml = '';
+	    for (var i=0; i<numberOfDisks; i++){
+	      diskHtml += disks[i].getHtml();
+	    }
+	    return diskHtml
+	},
+
+	createTowerHtml : function(towers){
+	    var towerHtml = ""
+	    for (var i=0; i<towers.length; i++){
+	      towerHtml += towers[i].getHtml();
+	    }
+		return towerHtml; 
+  }
 
 }
 
@@ -67,6 +91,16 @@ var Disk = function(radius, yStart, diskId){
 
 		getDiskId : function(){
 			return diskId;
+		}, 
+
+		getHtml : function(){
+			return '<circle id = "' 
+	                  + this.getDiskId() 
+	                  + '" cx="50" cy="' 
+	                  + this.getYLocation() 
+	                  + '" r="' 
+	                  + this.getRadius() 
+	                  + '"></circle>';
 		}
 	}
 }
@@ -83,6 +117,16 @@ var Tower = function(width, height, xLocation) {
 
 		getXLocation : function(){
 			return xLocation;
+		},
+
+		getHtml : function(){
+			return '<rect x='
+					 + this.getXLocation() 
+	                 + ' y=10 width="' 
+	                 + this.getWidth() 
+	                 + '" height="' 
+	                 + this.getHeight() 
+	                 + '"/>';
 		}
 	}
 }
