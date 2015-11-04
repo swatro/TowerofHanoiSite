@@ -4,6 +4,7 @@ var moves = [];
 var index = 0;
 var startRadius = 10; 
 var distanceBetweenTowers = 10;
+var numberOfDisks = 0;
 
 var move = function(index){
   updateMoveButton(Game.isGameOver(index, moves.length), Game.calculateRemainingMoves(index, moves.length)); 
@@ -30,7 +31,7 @@ var playGame = function(){
 var setDisks = function(numberOfDisks, startRadius, disks){
   var diskHtml = '';
   for (var i=0; i<numberOfDisks; i++){
-    heightLocations[numberOfDisks-i]= disks[i].getYLocation();
+    heightLocations[numberOfDisks-i] = disks[i].getYLocation();
     diskHtml += '<circle id = "' 
                 + disks[i].getDiskId() 
                 + '" cx="50" cy="' 
@@ -72,22 +73,41 @@ var setMoveData = function(numberOfDisks){
 }
 
 var setGame = function(options){
-  var numberOfDisks = options.selectedOptions[0].value;
+  numberOfDisks = options.selectedOptions[0].value;
   setMoveData(numberOfDisks)
 
   $('svg').remove();
-  index = 0; 
+  index = 0;
 
   var disks = Game.createDisks(numberOfDisks, startRadius); 
   var towers = Game.createTowers(numberOfDisks, startRadius);
 
   towerLocations = Game.createDiskXLocationsPerTower(towers[0].getWidth());
-  heightLocations = Game.createDiskYLocationsPerDisk(disks);
 
   $(".game").append('<svg width="1000" height="' + towers[0].getHeight() + ' ">' 
     + setTowers(towers)
     + setDisks(numberOfDisks, startRadius, disks) 
     + '</svg>');
+}
+
+var resetGame = function(){
+  var disks = Game.createDisks(numberOfDisks, startRadius); 
+
+  for (var index in disks){
+    var circleName = "#" + disks[index].getDiskId();
+    var xLocation = towerLocations["tower1"];
+    var yLocation = disks[index].getYLocation()
+
+    var circle = d3.selectAll(circleName)
+    .transition()
+    .delay(100)
+    .duration(1000)
+    .attr("cy", function() { return yLocation; })
+    .attr("cx", function() { return xLocation; })
+    .each("end",function(){return});
+  }
+
+  updateMoveButton(false, moves.length)
 }
 
 var updateMoveButton = function(status, remainingMoves){

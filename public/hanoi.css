@@ -9,3 +9,11 @@ circle {
 body {
 	padding: 10px;
 }
+
+#forwardButton {
+	margin: 2px;
+}
+
+#resetButton {
+	margin: 2px;
+}
