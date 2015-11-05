@@ -20,7 +20,7 @@ Pencil = {
 
 	drawGame : function(towerHtml, diskHtml, towerHeight){
 	  $('svg').remove();
-	  $(".game").append('<svg width="1000" height="' + towerHeight + ' ">' 
+	  $(".game").append('<svg width="400" height="' + towerHeight + ' ">' 
 	    + towerHtml
 	    + diskHtml
 	    + '</svg>');
